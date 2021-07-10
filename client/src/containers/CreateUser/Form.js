@@ -53,7 +53,7 @@ const CreateUserForm = (props)=>{
             </Form.Control.Feedback>
         </Form.Group>
         <styled.ButtonContainer>
-            <Button onClick={props.submitForm} size="lg" block disabled={!props.isValid} variant="primary" type="button">
+            <Button onClick={props.submitForm} size="lg" id="submit" block disabled={!props.isValid} variant="primary" type="button">
                 Submit
             </Button>
         </styled.ButtonContainer>

@@ -16,12 +16,12 @@ const UserList = (props)=>{
     const renderUserRow = ({index, style})=>{
         const u = state.users[index];
         return (
-            <styled.Row key={u.email} style={style}>
-                <styled.RowItem>{u.firstName}</styled.RowItem>
-                <styled.RowItem>{u.lastName}</styled.RowItem>
-                <styled.RowItem>{u.email}</styled.RowItem>
-                <styled.RowItem>{u.description}</styled.RowItem>
-                <styled.RowItem>{u.password}</styled.RowItem>
+            <styled.Row key={u.email} style={style} className="user-row">
+                <styled.RowItem className="firstName">{u.firstName}</styled.RowItem>
+                <styled.RowItem className="lastName">{u.lastName}</styled.RowItem>
+                <styled.RowItem className="email">{u.email}</styled.RowItem>
+                <styled.RowItem className="description">{u.description}</styled.RowItem>
+                <styled.RowItem className="password">{u.password}</styled.RowItem>
             </styled.Row>
         )
     }

@@ -27,7 +27,6 @@ const UsersProvider = (props)=>{
         return new Promise(async(resolve, reject)=>{
             try{
                 const res = await axios.post(`${REACT_APP_API_URL}/user`, user);
-                debugger
                 setUsers([...users, res.data])
                 resolve(res.data);
             }catch(err){

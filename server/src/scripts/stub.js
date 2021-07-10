@@ -1,13 +1,14 @@
 import { User } from '../schemas';
+import faker from 'faker';
 
 export default ()=>{
     User.remove({}, function (err, count){ 
         const arr = [];
         for(let i = 0; i < 500; i++){
             arr.push(   {
-                firstName: random(),
-                lastName: random(),
-                email: makeEmail(),
+                firstName: faker.name.firstName(),
+                lastName: faker.name.lastName(),
+                email: faker.internet.email(),
                 description: random(30),
                 password: random(30)
             },)

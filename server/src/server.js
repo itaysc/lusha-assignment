@@ -14,7 +14,7 @@ export class Server {
         this.initialize();
         this.initRoutesMiddlewares();
         this.initRoutes();
-        //createStub();
+        createStub();
     }
 
     initialize = ()=>{

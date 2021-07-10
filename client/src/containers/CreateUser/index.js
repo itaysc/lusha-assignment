@@ -5,6 +5,7 @@ import { useToasts } from 'react-toast-notifications';
 import CreateUser from './Form';
 import {UsersContext} from '../../context/UsersContext';
 import { createUserValidation } from '../../utils/validations';
+import { withRouter } from "react-router";
 const CreateUserContainer = (props)=>{
 
     const {actions} = useContext(UsersContext);
@@ -15,6 +16,7 @@ const CreateUserContainer = (props)=>{
             setSubmitting(true);
             const res = await actions.createUser(values);
             addToast(`User was saved successfully`, { appearance: 'success' });
+            props.history.push("/")
         }catch(err){
             console.log(err);
             addToast(`Error occurred. Please try again.`, { appearance: 'error' });
@@ -67,4 +69,4 @@ const CreateUserContainer = (props)=>{
 }
 
 
-export default CreateUserContainer;
+export default withRouter(CreateUserContainer);
