@@ -1,20 +1,26 @@
-const arr = [];
-for(let i = 0; i < 500; i++){
-    arr.push(   {
-        firstName: random(),
-        lastName: random(),
-        email: makeEmail(),
-        description: random(30),
-        password: random(30)
-    },)
-}
+import { User } from '../schemas';
 
-export default arr;
-    
+export default ()=>{
+    User.remove({}, function (err, count){ 
+        const arr = [];
+        for(let i = 0; i < 500; i++){
+            arr.push(   {
+                firstName: random(),
+                lastName: random(),
+                email: makeEmail(),
+                description: random(30),
+                password: random(30)
+            },)
+        }
+        
+        User.insertMany(arr);
+    });
+
+}
 
 
 function makeEmail() { 
-    var strValues="abcdefg12345"; 
+    var strValues="abcdefghijklmnopqrstuvwxyz1234567890"; 
     var strEmail = ""; 
     var strTmp; 
     for (var i=0;i<10;i++) { 

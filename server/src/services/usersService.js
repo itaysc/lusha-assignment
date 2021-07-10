@@ -1,5 +1,6 @@
 import stub from './stub';
-import User from '../schemas/userSchema';
+import { User } from '../schemas';
+
 export default () => {
     return {
         getAllUsers: ()=>{

@@ -6,6 +6,7 @@ import cors  from 'cors';
 import initUserRoutes from './routes/users';
 import {validateRequest} from './middleware';
 import mongoose from 'mongoose';
+import createStub from './scripts/stub';
 
 const MONGO_CONNECTION_STRING="mongodb://mongo-db:27017";
 export class Server {
@@ -13,6 +14,7 @@ export class Server {
         this.initialize();
         this.initRoutesMiddlewares();
         this.initRoutes();
+        //createStub();
     }
 
     initialize = ()=>{

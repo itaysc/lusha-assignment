@@ -2,7 +2,7 @@
 import React, { useContext, Fragment, useEffect } from 'react';
 import {UsersContext} from '../../context/UsersContext';
 import * as styled from './styled';
-import {VirtualList} from '../../components';
+import VirtualList from 'react-tiny-virtual-list';
 
 
 const UserList = (props)=>{
@@ -11,48 +11,44 @@ const UserList = (props)=>{
         if(!state.users || !state.users.length)
         actions.fetchUsers();
     },[])
-    const renderUserRows = ()=>{
-        return state.users.map((u, index)=>{
-            return (
-                <Fragment key={u.email}>
-                    <styled.CellFirstName index={index+2}>{u.firstName}</styled.CellFirstName>
-                    <styled.CellLastName index={index+2}>{u.lastName}</styled.CellLastName>
-                    <styled.CellEmail index={index+2}>{u.email}</styled.CellEmail>
-                    <styled.CellDescription index={index+2}>{u.description}</styled.CellDescription>
-                    <styled.CellPassword index={index+2}>{u.password}</styled.CellPassword>
-                </Fragment>
-            )
-        })
-    }
+
 
     const renderUserRow = ({index, style})=>{
         const u = state.users[index];
         return (
-            <Fragment key={u.email}>
-                <styled.CellFirstName index={index+2}>{u.firstName}</styled.CellFirstName>
-                <styled.CellLastName index={index+2}>{u.lastName}</styled.CellLastName>
-                <styled.CellEmail index={index+2}>{u.email}</styled.CellEmail>
-                <styled.CellDescription index={index+2}>{u.description}</styled.CellDescription>
-            </Fragment>
+            <styled.Row key={u.email} style={style}>
+                <styled.RowItem>{u.firstName}</styled.RowItem>
+                <styled.RowItem>{u.lastName}</styled.RowItem>
+                <styled.RowItem>{u.email}</styled.RowItem>
+                <styled.RowItem>{u.description}</styled.RowItem>
+                <styled.RowItem>{u.password}</styled.RowItem>
+            </styled.Row>
         )
     }
 
     return (
-        <styled.Container rowsCount={state.users.length}>
-            <styled.HeaderFirstName>First Name</styled.HeaderFirstName>
-            <styled.HeaderLastName>Last Name</styled.HeaderLastName>
-            <styled.HeaderEmail>Email</styled.HeaderEmail>
-            <styled.HeaderDescription>Description</styled.HeaderDescription>
-            <styled.HeaderPassword>Password</styled.HeaderPassword>
-            <VirtualList
-                windowHeight={400}
-                numItems={state.users.length}
-                itemHeight={100} // Also supports variable heights (array or function getter)
-                renderItem={renderUserRow}
-            />
+        <>
+            <styled.Row>
+                <styled.RowItem>First Name</styled.RowItem>
+                <styled.RowItem>Last Name</styled.RowItem>
+                <styled.RowItem>Email</styled.RowItem>
+                <styled.RowItem>Description</styled.RowItem>
+                <styled.RowItem>Password</styled.RowItem>
+            </styled.Row>
+            <div style={{height:'600px', overflowY: 'scroll'}}>
+                <VirtualList
+                    width='100%'
+                    height={500}
+                    itemCount={state.users.length}
+                    itemSize={60} // Also supports variable heights (array or function getter)
+                    renderItem={renderUserRow}
+                />
+            </div>
+      
+       
           
            {/* { renderUserRows() } */}
-        </styled.Container>
+        </>
     )
 }
 

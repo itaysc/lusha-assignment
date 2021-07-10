@@ -1,17 +1,19 @@
 import React, {useState} from 'react';
 import usersStub from './stub';
 import axios from 'axios';
-const {API_URL} = process.env;
+import config from '../config';
+const {REACT_APP_API_URL} = config;
+
 const UsersContext = React.createContext()
 const { Provider: ContextElement } = UsersContext;
 
 const UsersProvider = (props)=>{
-    const [users, setUsers] = useState(usersStub);
+    const [users, setUsers] = useState([]);
 
     const fetchUsers = ()=>{
         return new Promise(async(resolve, reject)=>{
             try{
-                const res = await axios.get("http://localhost/api/users");
+                const res = await axios.get(`${REACT_APP_API_URL}/users`);
                 setUsers(res.data);
                 resolve (res.data);
             }catch(err){
@@ -24,7 +26,7 @@ const UsersProvider = (props)=>{
     function createUser(user){
         return new Promise(async(resolve, reject)=>{
             try{
-                const res = await axios.post(`http://localhost/api/user`, user);
+                const res = await axios.post(`${REACT_APP_API_URL}/user`, user);
                 debugger
                 setUsers([...users, res.data])
                 resolve(res.data);
