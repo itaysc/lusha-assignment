@@ -17,3 +17,8 @@
 ## How to run
 
 * In the root directory you can find a ```docker-compose.yaml``` file. first, make the build using ```docker-compose build```, once it i done run it using ```docker-compose up```.
+
+## How to run tests
+
+* First, make sure that the app is running.
+* cd to the ```client``` folder. run ```npm run test:e2e```

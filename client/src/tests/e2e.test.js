@@ -9,7 +9,7 @@ describe("App.js", () => {
     REACT_APP_API_URL: "http://localhost/api"
   }
   beforeAll(async () => {
-    browser = await puppeteer.launch({ headless: true });
+    browser = await puppeteer.launch({ headless: false });
     page = await browser.newPage();
     user = {
       firstName: faker.name.firstName(),
