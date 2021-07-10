@@ -24,6 +24,7 @@ export class Server {
         app.use(express.json());
         app.use(cors({
           origin: function(origin, callback){
+            console.log("received call from origin:  ", origin)
             return callback(null, true);
           },
           optionsSuccessStatus: 200,

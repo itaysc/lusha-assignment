@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import usersStub from './stub';
 import axios from 'axios';
 import config from '../config';
@@ -8,13 +8,28 @@ const UsersContext = React.createContext()
 const { Provider: ContextElement } = UsersContext;
 
 const UsersProvider = (props)=>{
-    const [users, setUsers] = useState([]);
+    const [users, setUsers] = useState({
+        data: [],
+        currPage: 0,
+        hasMoreData: false
+    });
 
-    const fetchUsers = ()=>{
+
+    useEffect(()=>{
+        if(users.hasMoreData){
+            fetchUsers(users.currPage);
+        }
+    },[users]);
+
+    function fetchUsers(page=0, pageSize=200){
         return new Promise(async(resolve, reject)=>{
             try{
-                const res = await axios.get(`${REACT_APP_API_URL}/users`);
-                setUsers(res.data);
+                const res = await axios.get(`${REACT_APP_API_URL}/users/${page}/${pageSize}`);
+                setUsers({
+                    data: [...users.data, ...res.data.users],
+                    hasMoreData: res.data.hasMore,
+                    currPage: page+1
+                });
                 resolve (res.data);
             }catch(err){
                 reject(err);

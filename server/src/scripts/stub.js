@@ -2,7 +2,7 @@ import { User } from '../schemas';
 import faker from 'faker';
 
 export default ()=>{
-    User.remove({}, function (err, count){ 
+    User.remove({}, function (err){ 
         const arr = [];
         for(let i = 0; i < 500; i++){
             arr.push(   {
@@ -19,24 +19,6 @@ export default ()=>{
 
 }
 
-
-function makeEmail() { 
-    var strValues="abcdefghijklmnopqrstuvwxyz1234567890"; 
-    var strEmail = ""; 
-    var strTmp; 
-    for (var i=0;i<10;i++) { 
-    strTmp = strValues.charAt(Math.round(strValues.length*Math.random())); 
-    strEmail = strEmail + strTmp; 
-    } 
-    strTmp = ""; 
-    strEmail = strEmail + "@"; 
-    for (var j=0;j<8;j++) { 
-    strTmp = strValues.charAt(Math.round(strValues.length*Math.random())); 
-    strEmail = strEmail + strTmp; 
-    } 
-    strEmail = strEmail + ".com" 
-    return strEmail; 
-    } 
 
     function random(length= 4) {
         var result           = '';
